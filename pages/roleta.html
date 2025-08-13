@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="description" content="Roleta - Gire a roleta e teste sua sorte!" />
   <meta name="theme-color" content="#f5811e" />
-  <title>Roleta</title>
+  <title>Roleta - Game Space</title>
   <link rel="stylesheet" href="../css/config.css" />
   <link rel="stylesheet" href="../css/roleta.css" />
+  <link rel="preload" href="../img/mascote.png" as="image" />
+  <link rel="preload" href="../img/roleta.png" as="image" />
+  <link rel="preload" href="../img/logo.png" as="image" />
 </head>
 <body>
 
@@ -32,7 +38,7 @@
       </div>
 
       <button id="spinBtn" type="button">Girar</button>
-      <p id="status" aria-live="polite"></p>
+      <p id="status" aria-live="polite">Clique em "Girar" para começar!</p>
     </section>
   </main>
 
@@ -43,7 +49,7 @@
       <div id="boxinf">
         <h1 id="res-titulo">Resultado</h1>
         <h2 id="res-texto">—</h2>
-        <a href="../index.html" id="res-btn">Reiniciar</a>
+        <a href="#" id="res-btn">Jogar Novamente</a>
       </div>
     </div>
   </div>

@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="description" content="Jogo da Memória - Teste sua memória com este divertido jogo de cartas">
     <meta name="theme-color" content="#f5811e">
-    <title>Game Space</title>
+    <title>Jogo da Memória - Game Space</title>
     <link rel="stylesheet" href="../css/config.css">
     <link rel="stylesheet" href="../css/jogo-da-memoria.css">
+    <link rel="preload" href="../img/mascote.png" as="image">
+    <link rel="preload" href="../img/logo.png" as="image">
 </head>
 <body>
     <main>
@@ -30,15 +35,15 @@
         <div id="cabecalho">
             <img src="../img/mascote.png" alt="logo">
             <div id="cronometro">
-                <p>Tempo <span id="valor">00:30</span></p>
+                <p>⏱️ Tempo <span>00:60</span></p>
             </div>
             <div id="pontos">
-                <p>Pontos <span id="valor">100</span></p>
+                <p>🏆 Pontos <span>0</span></p>
             </div>
+            <button id="btn-fullscreen" type="button">Tela Cheia</button>
             <a href="../index.html">Voltar</a>
         </div>
         <div id="game"></div>
-        
     </main>
     <script src="../js/jogo-da-memoria.js"></script>
 </body>

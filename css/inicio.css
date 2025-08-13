@@ -1,199 +1,247 @@
-/* ===== Base responsivo (mobile-first) ===== */
-
-#game img{
-    width: min(90%, 300px);
-    height: auto;
-    margin-bottom: clamp(16px, 4vw, 32px);
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
-}
-
+/* Layout principal moderno */
 main{
-    display: flex;
+    display: grid;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: clamp(16px, 4vw, 32px);
-    flex-direction: column;
+    padding: clamp(20px, 4vw, 40px);
+    gap: clamp(32px, 6vw, 64px);
+    min-height: calc(100vh - 80px);
     align-items: center;
-    gap: clamp(24px, 5vw, 48px);
-    min-height: calc(100vh - 60px);
     justify-content: center;
+    grid-template-columns: 1fr;
+    animation: fadeInUp 0.8s ease-out;
 }
 
-main div{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(16px, 3vw, 24px);
-}
-
-#redes img{
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    border-radius: clamp(12px, 2vw, 20px);
-    border: 0;
-    object-fit: cover;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-}
-
-main div h3{
-    text-transform: uppercase;
-    padding: clamp(8px, 2vw, 16px) 0;
-    color: #fff;
-    text-align: center;
-    font-size: clamp(16px, 3vw, 24px);
-    line-height: 1.3;
-    margin: 0;
-    font-weight: 700;
-}
-
-main div a{
-    text-decoration: none;
-    background: #000;
-    color: #fff;
-    width: 100%;
-    max-width: 400px;
-    padding: clamp(14px, 3vw, 20px) clamp(18px, 4vw, 24px);
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: clamp(8px, 2vw, 12px);
-    border: 0;
-    cursor: pointer;
-    transition: transform .2s ease, background-color .2s ease, color .2s ease;
-    font-size: clamp(16px, 3vw, 20px);
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-main div a:hover,
-main div a:focus{
-    transform: translateY(-2px);
-    background: #fff;
-    color: #000;
-    outline: none;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-}
-
-/* Redução de movimento para acessibilidade */
-@media (prefers-reduced-motion: reduce){
-    main div a, #redes img, #game img{ 
-        transition: none; 
-        transform: none !important;
-    }
-}
-
-/* ===== Tablets pequenos (≥ 480px) ===== */
-@media (min-width: 480px){
-    main div a{
-        max-width: 320px;
-    }
-    
-    #redes img{
-        max-width: 320px;
-    }
-}
-
-/* ===== Tablets médios (≥ 640px) ===== */
-@media (min-width: 640px){
-    #game{
-        gap: clamp(20px, 3vw, 32px);
-    }
-    
-    #game a{
-        max-width: 360px;
-    }
-
-    #redes{
-        max-width: 400px;
-    }
-    
-    #redes img{
-        max-width: 360px;
-    }
-}
-
-/* ===== Tablets grandes (≥ 768px) ===== */
-@media (min-width: 768px){
-    main{ 
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(32px, 6vw, 64px);
-        min-height: calc(100vh - 80px);
-    }
-
-    main div{
-        flex: 1;
-        max-width: 500px;
-    }
-    
-    #game{
-        order: 1;
-    }
-    
-    #redes{
-        order: 2;
-    }
-}
-
-/* ===== Desktop (≥ 1024px) ===== */
-@media (min-width: 1024px){
-    main div a{
-        padding: clamp(18px, 3vw, 24px) clamp(24px, 4vw, 32px);
-        font-size: clamp(18px, 2.5vw, 22px);
-        max-width: 420px;
-    }
-
-    #redes img{
-        max-width: 400px;
-    }
-}
-
-/* ===== Desktop grande (≥ 1200px) ===== */
-@media (min-width: 1200px){
-    main{
+/* Layout responsivo */
+@media (min-width: 768px) {
+    main {
+        grid-template-columns: 1fr 1fr;
         gap: clamp(48px, 8vw, 80px);
     }
-    
-    main div a{
-        font-size: clamp(20px, 2vw, 24px);
-        max-width: 480px;
-    }
-    
-    #game img{
-        max-width: 360px;
-    }
-    
-    #redes img{
-        max-width: 440px;
+}
+
+@media (min-width: 1200px) {
+    main {
+        gap: clamp(64px, 10vw, 120px);
     }
 }
 
-/* ===== Orientação landscape em dispositivos móveis ===== */
-@media (max-height: 600px) and (orientation: landscape){
-    main{
-        flex-direction: row;
-        gap: clamp(24px, 4vw, 40px);
-        padding: clamp(12px, 2vw, 20px);
+/* Seções principais */
+#game, #redes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(24px, 4vw, 32px);
+    padding: clamp(24px, 4vw, 32px);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-smooth);
+    animation: scaleIn 0.6s ease-out;
+}
+
+#game:hover, #redes:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-heavy);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Logo principal */
+#game img {
+    width: min(85%, 320px);
+    height: auto;
+    filter: drop-shadow(var(--shadow-medium));
+    transition: var(--transition-smooth);
+    border-radius: clamp(8px, 2vw, 16px);
+}
+
+#game img:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(var(--shadow-heavy));
+}
+
+/* Título da seção de jogos */
+#game h2 {
+    color: var(--white);
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    margin: 0;
+    text-align: center;
+}
+
+/* Botões modernos com melhor touch target */
+#game a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: var(--black);
+    color: var(--white);
+    width: 100%;
+    max-width: 400px;
+    min-height: 56px; /* Melhor para touch */
+    padding: clamp(16px, 3vw, 20px) clamp(24px, 4vw, 32px);
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: var(--border-radius);
+    border: 0;
+    font-size: clamp(16px, 3vw, 20px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de hover moderno */
+#game a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: var(--transition-smooth);
+}
+
+#game a:hover::before {
+    left: 100%;
+}
+
+#game a:hover,
+#game a:focus {
+    transform: translateY(-3px) scale(1.02);
+    background: var(--white);
+    color: var(--black);
+    box-shadow: var(--shadow-heavy);
+}
+
+#game a:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: var(--transition-fast);
+}
+
+/* Seção de redes sociais */
+#redes {
+    animation-delay: 0.2s;
+}
+
+#redes img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-smooth);
+}
+
+#redes img:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-heavy);
+}
+
+#redes h3 {
+    text-transform: uppercase;
+    color: var(--white);
+    text-align: center;
+    font-size: clamp(18px, 3.5vw, 24px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Animações de entrada escalonadas */
+#game {
+    animation-delay: 0s;
+}
+
+#redes {
+    animation-delay: 0.3s;
+}
+
+/* Otimizações para telas touch grandes */
+@media (min-width: 1024px) {
+    #game a {
+        min-height: 64px;
+        font-size: clamp(18px, 2.5vw, 22px);
+        max-width: 450px;
     }
     
-    #game img{
-        max-width: 200px;
-        margin-bottom: clamp(8px, 2vw, 16px);
+    #game img {
+        max-width: 380px;
     }
     
-    main div a{
-        padding: clamp(10px, 2vw, 14px) clamp(16px, 3vw, 20px);
-        font-size: clamp(14px, 2.5vw, 16px);
+    #redes img {
+        max-width: 350px;
+    }
+}
+
+/* Orientação landscape para tablets */
+@media (max-height: 700px) and (orientation: landscape) {
+    main {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(32px, 6vw, 48px);
+        padding: clamp(16px, 3vw, 24px);
+        min-height: calc(100vh - 60px);
     }
     
-    #redes img{
-        max-width: 200px;
+    #game, #redes {
+        padding: clamp(16px, 3vw, 24px);
+        gap: clamp(16px, 3vw, 24px);
     }
     
-    main div h3{
+    #game img {
+        max-width: 240px;
+    }
+    
+    #redes img {
+        max-width: 220px;
+    }
+    
+    #game a {
+        min-height: 48px;
         font-size: clamp(14px, 2.5vw, 18px);
+    }
+    
+    #redes h3 {
+        font-size: clamp(16px, 3vw, 20px);
+    }
+}
+
+/* Estados de loading/carregamento */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    filter: grayscale(0.3);
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-contrast: high) {
+    #game, #redes {
+        border: 2px solid var(--white);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    #game a {
+        border: 2px solid var(--white);
+    }
+}
+
+/* Suporte para modo escuro do sistema */
+@media (prefers-color-scheme: dark) {
+    #game, #redes {
+        background: rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
     }
 }

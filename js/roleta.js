@@ -82,6 +82,15 @@
         resBtn.removeEventListener('click', close);
       };
       resBtn.addEventListener('click', close);
+
+      // Adiciona vibração em dispositivos móveis (se suportado)
+      if ('vibrate' in navigator) {
+        if (result.type === 'brinde' || result.type === 'brinde2') {
+          navigator.vibrate([200, 100, 200, 100, 200]); // Vibração de sucesso
+        } else {
+          navigator.vibrate([100, 50, 100]); // Vibração neutra
+        }
+      }
     }, { once:true });
   });
 

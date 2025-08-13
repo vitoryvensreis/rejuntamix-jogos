@@ -1,44 +1,127 @@
 @font-face {
     font-family: 'Inter';
-    src: url('../font/Inter-Italic-VariableFont_opsz,wght.ttf') format('ttf'),
-         url('../font/MinhaFonte-Regular.ttf') format('ttf');
+    src: url('../font/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype'),
+         url('../font/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-display: swap;
 }
 
 *{
     margin: 0;
     padding: 0;
-    font-family: Inter;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     box-sizing: border-box;
+}
+
+/* Variáveis CSS para consistência */
+:root {
+    --primary-orange: #f5811e;
+    --dark-orange: #965015;
+    --white: #ffffff;
+    --black: #000000;
+    --shadow-light: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-medium: 0 8px 24px rgba(0,0,0,0.15);
+    --shadow-heavy: 0 12px 32px rgba(0,0,0,0.2);
+    --border-radius: clamp(12px, 2.5vw, 20px);
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body{
     width: 100%;
     min-height: 100vh;
-    background-color: #f5811e;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9a3c 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow-x: hidden;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Otimizações para touch */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* Melhor experiência touch */
+button, a, .card {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+/* Estados de foco melhorados para acessibilidade */
+button:focus-visible, 
+a:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
 }
 
 footer{
     display: flex;
     width: 100%;
-    padding: clamp(8px, 2vw, 16px);
+    padding: clamp(12px, 3vw, 20px);
     justify-content: center;
     align-items: center;
-    color: #965015;
-    font-size: clamp(10px, 1.5vw, 14px);
+    color: var(--dark-orange);
+    font-size: clamp(11px, 2vw, 15px);
     text-align: center;
     margin-top: auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 footer a{
     text-decoration: none;
-    color: #965015;
-    transition: color 0.2s ease;
+    color: var(--dark-orange);
+    transition: var(--transition-fast);
+    font-weight: 500;
 }
 
 footer a:hover{
-    color: #fff;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Animações globais */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Redução de movimento para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

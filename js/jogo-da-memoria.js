@@ -130,7 +130,63 @@
         e.preventDefault();
         location.reload();
       }, { once:true });
+
+      // Adiciona vibração em dispositivos móveis (se suportado)
+      if ('vibrate' in navigator) {
+        navigator.vibrate(won ? [200, 100, 200] : [500]);
+      }
     }
+  }
+
+  // Funcionalidade de tela cheia
+  const fullscreenBtn = document.getElementById('btn-fullscreen');
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    
+    // Atualiza o estado do botão quando sai/entra em tela cheia
+    document.addEventListener('fullscreenchange', updateFullscreenButton);
+    document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+    document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+    document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && 
+        !document.mozFullScreenElement && !document.msFullscreenElement) {
+      // Entra em tela cheia
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    } else {
+      // Sai da tela cheia
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  }
+
+  function updateFullscreenButton() {
+    const btn = document.getElementById('btn-fullscreen');
+    if (!btn) return;
+    
+    const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement || 
+                           document.mozFullScreenElement || document.msFullscreenElement);
+    
+    btn.textContent = isFullscreen ? 'Sair Tela Cheia' : 'Tela Cheia';
+    btn.classList.toggle('is-active', isFullscreen);
   }
 
   // Fisher–Yates
