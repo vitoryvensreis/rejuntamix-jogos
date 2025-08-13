@@ -16,20 +16,29 @@
 :root {
     --primary-orange: #f5811e;
     --dark-orange: #965015;
+    --light-orange: #ff9a3c;
     --white: #ffffff;
     --black: #000000;
-    --shadow-light: 0 4px 12px rgba(0,0,0,0.1);
-    --shadow-medium: 0 8px 24px rgba(0,0,0,0.15);
-    --shadow-heavy: 0 12px 32px rgba(0,0,0,0.2);
-    --border-radius: clamp(12px, 2.5vw, 20px);
+    --gray-light: #f8f9fa;
+    --gray-medium: #6c757d;
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 16px rgba(0,0,0,0.15);
+    --shadow-heavy: 0 8px 32px rgba(0,0,0,0.2);
+    --border-radius: clamp(8px, 2vw, 16px);
+    --border-radius-large: clamp(16px, 3vw, 24px);
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --spacing-xs: clamp(8px, 2vw, 12px);
+    --spacing-sm: clamp(12px, 3vw, 16px);
+    --spacing-md: clamp(16px, 4vw, 24px);
+    --spacing-lg: clamp(24px, 5vw, 32px);
+    --spacing-xl: clamp(32px, 6vw, 48px);
 }
 
 body{
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--primary-orange) 0%, #ff9a3c 100%);
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--light-orange) 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -38,14 +47,13 @@ body{
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Otimizações para touch */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
 }
 
 /* Melhor experiência touch */
-button, a, .card {
+button, a, .card, .interactive {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
@@ -61,23 +69,22 @@ a:focus-visible {
 footer{
     display: flex;
     width: 100%;
-    padding: clamp(12px, 3vw, 20px);
+    padding: var(--spacing-md);
     justify-content: center;
     align-items: center;
     color: var(--dark-orange);
     font-size: clamp(11px, 2vw, 15px);
     text-align: center;
     margin-top: auto;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 footer a{
     text-decoration: none;
     color: var(--dark-orange);
     transition: var(--transition-fast);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 footer a:hover{
@@ -108,6 +115,28 @@ footer a:hover{
     }
 }
 
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
@@ -115,6 +144,58 @@ footer a:hover{
     50% {
         transform: scale(1.05);
     }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0,0,0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -30px, 0);
+    }
+    70% {
+        transform: translate3d(0, -15px, 0);
+    }
+    90% {
+        transform: translate3d(0, -4px, 0);
+    }
+}
+
+/* Animação de confete */
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-orange);
+    animation: confetti-fall 3s linear infinite;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.confetti:nth-child(odd) {
+    background: var(--white);
+    border-radius: 50%;
+}
+
+.confetti:nth-child(even) {
+    background: var(--light-orange);
+}
+
+.confetti:nth-child(3n) {
+    width: 8px;
+    height: 8px;
+    background: var(--dark-orange);
 }
 
 /* Redução de movimento para acessibilidade */
@@ -125,3 +206,9 @@ footer a:hover{
         transition-duration: 0.01ms !important;
     }
 }
+
+/* Utilitários */
+.text-center { text-align: center; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.hidden { display: none !important; }
+.visible { display: block !important; }
