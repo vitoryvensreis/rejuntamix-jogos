@@ -1,317 +1,129 @@
-/* Layout principal moderno flat */
+/* ===== Base (mobile-first) ===== */
+* { box-sizing: border-box; }
+
+#game img{
+    width: 90%;
+    height: auto;
+    margin-bottom: 7%;
+}
+
 main{
-    display: grid;
-    width: 100%;
-    max-width: 1400px;
+    display: flex;
+    width: min(100%, 1100px);
     margin: 0 auto;
-    padding: var(--spacing-lg);
-    gap: var(--spacing-xl);
-    min-height: calc(100vh - 80px);
+    padding: 16px;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    grid-template-columns: 1fr;
-    animation: fadeInUp 0.8s ease-out;
+    gap: 24px;
 }
 
-/* Layout responsivo */
-@media (min-width: 768px) {
-    main {
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(48px, 8vw, 80px);
-    }
-}
-
-@media (min-width: 1200px) {
-    main {
-        gap: clamp(64px, 10vw, 120px);
-    }
-}
-
-/* Seções principais - Design Flat */
-#game, #redes {
+main div{
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-xl);
-    background: var(--white);
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition-smooth);
-    animation: scaleIn 0.6s ease-out;
-    position: relative;
-    overflow: hidden;
+    gap: 16px;
 }
 
-#game::before, #redes::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
-    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
-}
-
-#game:hover, #redes:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-heavy);
-}
-
-/* Logo principal com decoração */
-#game img {
-    width: min(85%, 320px);
-    height: auto;
-    filter: drop-shadow(var(--shadow-medium));
-    transition: var(--transition-smooth);
-    border-radius: var(--border-radius);
-    position: relative;
-}
-
-#game img:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(var(--shadow-heavy));
-}
-
-/* Título da seção de jogos */
-#game h2 {
-    color: var(--black);
-    font-size: clamp(24px, 5vw, 32px);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
-    text-align: center;
-    position: relative;
-}
-
-#game h2::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--primary-orange);
-    border-radius: 2px;
-}
-
-/* Botões flat modernos */
-#game a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    background: var(--primary-orange);
-    color: var(--white);
+#redes img{
     width: 100%;
-    max-width: 400px;
-    min-height: 64px;
-    padding: var(--spacing-md) var(--spacing-lg);
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: var(--border-radius);
+    height: auto;
+    border-radius: 16px;
     border: 0;
-    font-size: clamp(18px, 3.5vw, 22px);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition-smooth);
-    position: relative;
-    overflow: hidden;
-}
-
-#game a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: var(--transition-smooth);
-}
-
-#game a:hover::before {
-    left: 100%;
-}
-
-#game a:hover,
-#game a:focus {
-    transform: translateY(-4px) scale(1.02);
-    background: var(--dark-orange);
-    box-shadow: var(--shadow-heavy);
-}
-
-#game a:active {
-    transform: translateY(-2px) scale(0.98);
-    transition: var(--transition-fast);
-}
-
-/* Seção de redes sociais */
-#redes {
-    animation-delay: 0.2s;
-}
-
-#redes img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: var(--border-radius);
     object-fit: cover;
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition-smooth);
-    border: 3px solid var(--gray-light);
 }
 
-#redes img:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-heavy);
-    border-color: var(--primary-orange);
-}
-
-#redes h3 {
+main div h3{
     text-transform: uppercase;
-    color: var(--black);
+    padding: 8px 0;
+    color: #fff;
     text-align: center;
-    font-size: clamp(20px, 4vw, 26px);
-    font-weight: 800;
-    letter-spacing: 1px;
+    font-size: clamp(14px, 2.2vw, 20px);
+    line-height: 1.2;
     margin: 0;
-    line-height: 1.3;
-    position: relative;
 }
 
-#redes h3::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 3px;
-    background: var(--primary-orange);
-    border-radius: 2px;
+main div a{
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    width: 100%;
+    max-width: 640px;
+    padding: 14px 18px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    transition: transform .2s ease, background-color .2s ease, color .2s ease;
+    font-size: clamp(14px, 1.8vw, 18px);
+}
+main div a:hover,
+main div a:focus{
+    transform: translateY(-1px);
+    background: #fff;
+    color: #000;
+    outline: none;
 }
 
-/* Elementos decorativos */
-.decorative-element {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: var(--primary-orange);
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: pulse 2s infinite;
+/* Menos animação para quem prefere */
+@media (prefers-reduced-motion: reduce){
+    main div a{ transition: none; }
 }
 
-.decorative-element:nth-child(1) {
-    top: 20px;
-    right: 20px;
-    animation-delay: 0s;
-}
-
-.decorative-element:nth-child(2) {
-    bottom: 20px;
-    left: 20px;
-    animation-delay: 0.5s;
-    background: var(--light-orange);
-}
-
-/* Animações de entrada escalonadas */
-#game {
-    animation-delay: 0s;
-}
-
-#redes {
-    animation-delay: 0.3s;
-}
-
-/* Otimizações para telas touch grandes */
-@media (min-width: 1024px) {
-    #game a {
-        min-height: 72px;
-        font-size: clamp(20px, 3vw, 24px);
-        max-width: 450px;
+/* ===== Tablets (≥ 640px) ===== */
+@media (min-width: 640px){
+    /* organiza os botões do #game em 2 colunas */
+    #game{
+        display: flex;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
     }
-    
-    #game img {
-        max-width: 380px;
+    #game a{
+        width: 100%;
+        margin: 0;
     }
-    
-    #redes img {
-        max-width: 350px;
+
+    /* imagem do QR e título lado a lado se quiser */
+    #redes{
+        max-width: 720px;
     }
 }
 
-/* Orientação landscape para tablets */
-@media (max-height: 700px) and (orientation: landscape) {
-    main {
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(32px, 6vw, 48px);
-        padding: var(--spacing-md);
-        min-height: calc(100vh - 60px);
+/* ===== Desktop (≥ 1024px) ===== */
+@media (min-width: 1024px){
+    main{ 
+        gap: 32px;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        height: 90vh;
     }
-    
-    #game, #redes {
-        padding: var(--spacing-lg);
-        gap: var(--spacing-md);
-    }
-    
-    #game img {
-        max-width: 240px;
-    }
-    
-    #redes img {
-        max-width: 220px;
-    }
-    
-    #game a {
-        min-height: 56px;
-        font-size: clamp(16px, 3vw, 20px);
-    }
-    
-    #redes h3 {
-        font-size: clamp(18px, 3.5vw, 22px);
-    }
-}
 
-/* Estados de loading/carregamento */
-.loading {
-    opacity: 0.7;
-    pointer-events: none;
-    filter: grayscale(0.3);
-}
+    main div img{ border-radius: 20px; }
+    main div a{
+        padding: 30px 20px;
+        border-radius: 12px;
+        font-size: 2em;
+    }
 
-/* Melhorias para acessibilidade */
-@media (prefers-contrast: high) {
-    #game, #redes {
-        border: 2px solid var(--black);
-    }
-    
-    #game a {
-        border: 2px solid var(--white);
-    }
-}
-
-/* Responsividade para telas muito pequenas */
-@media (max-width: 480px) {
-    main {
-        padding: var(--spacing-md);
-        gap: var(--spacing-lg);
-    }
-    
-    #game, #redes {
-        padding: var(--spacing-lg);
-    }
-    
-    #game h2 {
-        font-size: clamp(20px, 6vw, 28px);
-    }
-    
-    #redes h3 {
-        font-size: clamp(18px, 5vw, 24px);
+    /* deixa #redes com imagem e texto em duas colunas no desktop */
+    #redes{
+        display: flex;
+        grid-template-columns: 300px 1fr;
+        gap: 20px;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
     }
 }

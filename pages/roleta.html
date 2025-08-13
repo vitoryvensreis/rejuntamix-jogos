@@ -3,35 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="description" content="Roleta - Gire a roleta e teste sua sorte!" />
-  <meta name="theme-color" content="#f5811e" />
-  <title>Roleta - Game Space</title>
+  <title>Roleta</title>
   <link rel="stylesheet" href="../css/config.css" />
   <link rel="stylesheet" href="../css/roleta.css" />
-  <link rel="preload" href="../img/mascote.png" as="image" />
-  <link rel="preload" href="../img/roleta.png" as="image" />
-  <link rel="preload" href="../img/logo.png" as="image" />
-  <link rel="preload" href="../img/02.png" as="image" />
-  <link rel="preload" href="../img/05.png" as="image" />
-  <link rel="preload" href="../img/06.png" as="image" />
 </head>
 <body>
 
   <!-- Splash / Intro -->
   <div id="splash" aria-hidden="true">
     <div class="splash-bg"></div>
-    <img class="splash-logo" src="../img/logo.png" alt="Game Space">
+    <img class="splash-logo" src="../img/logo.png" alt="Rejuntamix">
   </div>
 
   <main>
     <div id="cabecalho">
       <img src="../img/mascote.png" alt="logo" />
       <a href="../index.html">Voltar</a>
-      <div class="decorative-element"></div>
-      <div class="decorative-element"></div>
     </div>
 
     <section id="roleta-area">
@@ -43,7 +30,7 @@
       </div>
 
       <button id="spinBtn" type="button">Girar</button>
-      <p id="status" aria-live="polite">Clique em "Girar" para começar!</p>
+      <p id="status" aria-live="polite"></p>
     </section>
   </main>
 
@@ -54,7 +41,7 @@
       <div id="boxinf">
         <h1 id="res-titulo">Resultado</h1>
         <h2 id="res-texto">—</h2>
-        <a href="#" id="res-btn">Jogar Novamente</a>
+        <a href="../index.html" id="res-btn">Reiniciar</a>
       </div>
     </div>
   </div>

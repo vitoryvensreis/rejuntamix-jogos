@@ -62,15 +62,6 @@
       const result = SECTORS[idx];
 
       status.textContent = `Resultado: ${result.label}`;
-      
-      // Adiciona efeitos baseados no resultado
-      if (result.type === 'brinde' || result.type === 'brinde2') {
-        createConfetti();
-        playSound('win');
-      } else {
-        playSound('neutral');
-      }
-      
       //POP RESULTADO
       if(result.label == "BRINDE ESPECIAL" && result.type == "brinde"){
         resimg.src = "../img/02.png";
@@ -91,15 +82,6 @@
         resBtn.removeEventListener('click', close);
       };
       resBtn.addEventListener('click', close);
-
-      // Adiciona vibração em dispositivos móveis (se suportado)
-      if ('vibrate' in navigator) {
-        if (result.type === 'brinde' || result.type === 'brinde2') {
-          navigator.vibrate([200, 100, 200, 100, 200, 100, 200]); // Vibração de sucesso
-        } else {
-          navigator.vibrate([150, 50, 150]); // Vibração neutra
-        }
-      }
     }, { once:true });
   });
 
@@ -130,76 +112,5 @@
     return Promise.all(urls.map(u => new Promise(res => {
       const i = new Image(); i.onload = i.onerror = res; i.src = u;
     })));
-  }
-
-  // Sistema de confete
-  function createConfetti() {
-    const colors = ['#f5811e', '#ff9a3c', '#965015', '#ffffff'];
-    const confettiCount = 40;
-    
-    for (let i = 0; i < confettiCount; i++) {
-      setTimeout(() => {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 2 + 's';
-        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        document.body.appendChild(confetti);
-        
-        setTimeout(() => {
-          confetti.remove();
-        }, 5000);
-      }, i * 40);
-    }
-  }
-
-  // Sistema de sons
-  function playSound(type) {
-    // Cria contexto de áudio se não existir
-    if (!window.audioContext) {
-      try {
-        window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      } catch (e) {
-        console.log('Web Audio API não suportada');
-        return;
-      }
-    }
-
-    const ctx = window.audioContext;
-    
-    if (type === 'win') {
-      // Som de vitória - sequência ascendente
-      const frequencies = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-      frequencies.forEach((freq, index) => {
-        setTimeout(() => {
-          playTone(ctx, freq, 0.3, 0.2);
-        }, index * 150);
-      });
-    } else if (type === 'neutral') {
-      // Som neutro
-      playTone(ctx, 600, 0.2, 0.3);
-    } else if (type === 'spin') {
-      // Som de girar
-      playTone(ctx, 400, 0.1, 0.1);
-    }
-  }
-
-  function playTone(ctx, frequency, volume, duration) {
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-    
-    oscillator.frequency.value = frequency;
-    oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.01);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
-    
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + duration);
   }
 })();
