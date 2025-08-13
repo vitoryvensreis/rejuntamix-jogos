@@ -1,0 +1,284 @@
+/* ===== Reset & Proteções ===== */
+* { box-sizing: border-box; min-width: 0; }
+html, body { height: 100%; }
+img, svg { display: block; max-width: 100%; height: auto; }
+body{
+  margin: 0;
+  overflow-x: hidden;               /* sem rolagem lateral */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ===== Tokens ===== */
+:root{
+  --brand: #f5811e;                 /* laranja da marca */
+  --black: #000;
+  --white: #fff;
+  --radius: 14px;
+  --shadow: 0 6px 12px rgba(0,0,0,.18);
+  --shadow-in: 0 0 0 3px #fff inset;
+  --gap: 14px;
+  --wrap: 1200px;
+}
+
+/* ===== Layout geral ===== */
+main{
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 32px);
+  display: grid;
+  grid-template-columns: 1fr;        /* mobile: empilhado */
+  gap: clamp(16px, 3vw, 28px);
+  align-items: start;
+  background: var(--brand);
+  color: var(--white);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Desktop: painel + tabuleiro (sem estourar) */
+@media (min-width: 1024px){
+  main{
+    grid-template-columns: clamp(240px, 32vw, 420px) minmax(0, 1fr);
+  }
+}
+
+/* ===== Painel (logo/tempo/pontos/voltar) ===== */
+#cabecalho{
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  justify-items: start;
+}
+
+#cabecalho img[alt="logo"]{
+  width: clamp(200px, 26vw, 440px);
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.25));
+}
+
+#cronometro p,
+#pontos p{
+  margin: 0;
+  width: min(100%, 360px);
+  background: var(--white);
+  color: var(--black);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  text-transform: uppercase;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px;
+}
+#cronometro span,
+#pontos span{ font-weight: 900; }
+
+/* Botão Voltar */
+#cabecalho a{
+  display: inline-block;
+  margin-top: 6px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+#cabecalho a:hover,
+#cabecalho a:focus{
+  transform: translateY(-1px);
+  background: var(--white);
+  color: var(--black);
+  outline: none;
+}
+
+/* ===== Botão Tela Cheia ===== */
+#btn-fullscreen{
+  background: var(--white);
+  color: var(--black);
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+#btn-fullscreen:hover,
+#btn-fullscreen:focus{
+  transform: translateY(-1px);
+  background: var(--black);
+  color: var(--white);
+  outline: none;
+}
+#btn-fullscreen.is-active{
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ===== Tabuleiro 4x4 ===== */
+#game{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 colunas fixas */
+  grid-template-rows: repeat(4, 1fr);      /* 4 linhas fixas */
+  gap: var(--gap);
+  width: 100%;
+  max-width: 720px;                         /* limite confortável no desktop */
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;                      /* células sempre quadradas */
+}
+
+/* Em telas muito baixas (landscape no mobile), caber na altura */
+@media (max-height: 700px){
+  #game{ max-width: min(720px, 80vh); }
+}
+
+/* ===== Cartas com flip 3D ===== */
+.card{
+  position: relative;
+  perspective: 1000px;
+  border-radius: var(--radius);
+  isolation: isolate;
+}
+.card__inner{
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .45s ease;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card.is-flipped .card__inner{ transform: rotateY(180deg); }
+
+.card__face{
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.card__face img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card__face--front{ transform: rotateY(180deg); }
+
+.card.matched{
+  pointer-events: none;
+  filter: grayscale(.15) brightness(1.06);
+}
+.card.matched .card__inner{ box-shadow: var(--shadow-in), var(--shadow); }
+
+/* ===== Splash / Intro ===== */
+#splash{
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  overflow: hidden; background: #0000;
+}
+#splash .splash-bg{
+  position: absolute; inset: -10%;
+  background: linear-gradient(120deg,#f28c1f, #ffb347, #f28c1f);
+  background-size: 200% 200%;
+  animation: splashBg 1.2s ease-in-out infinite alternate;
+  filter: saturate(1.1);
+}
+#splash .splash-logo{
+  width: clamp(160px, 36vw, 420px);
+  height: auto;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.35));
+  animation: splashPop .6s ease forwards;
+}
+#splash.is-done{
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+@keyframes splashBg{
+  0%{ background-position: 0% 50%; transform: scale(1.05); }
+  100%{ background-position: 100% 50%; transform: scale(1.0); }
+}
+@keyframes splashPop{
+  0%{ transform: scale(.8); opacity: 0; }
+  100%{ transform: scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce){
+  #splash .splash-bg{ animation: none; }
+  #splash .splash-logo{ animation: none; }
+  #splash{ transition: none; }
+}
+
+/* ===== Modal de Resultado ===== */
+#resultado{
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #00000091;
+  display: none;                          /* escondido por padrão */
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+#resultado.open{ display: flex; }
+
+#box{
+  width: clamp(280px, 50vw, 860px);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background-color: #fff;
+  padding: clamp(12px, 2.5vw, 28px);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+#boximg{ width: clamp(120px, 30%, 320px); }
+#boximg img{ width: 100%; height: auto; display: block; }
+
+#boxinf{
+  flex: 1;
+  color: #000;
+  display: grid;
+  gap: 8px;
+}
+#boxinf h1{
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(22px, 4vw, 44px);
+}
+#boxinf h2{
+  margin: 0;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 800;
+}
+#boxinf a{
+  display: inline-block;
+  margin-top: 8px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,.18);
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+#boxinf a:hover{ transform: translateY(-1px); }
+
+/* ===== Acessibilidade ===== */
+@media (prefers-reduced-motion: reduce){
+  .card__inner, #cabecalho a, #btn-fullscreen, #boxinf a{ transition: none; }
+}
+
+/* ===== Footer opcional ===== */
+footer{
+  width: 100%;
+  text-align: center;
+  color: rgba(0,0,0,.55);
+  font-size: 12px;
+  margin-top: 8px;
+  user-select: none;
+}

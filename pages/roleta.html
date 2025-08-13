@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roleta</title>
+  <link rel="stylesheet" href="../css/config.css" />
+  <link rel="stylesheet" href="../css/roleta.css" />
+</head>
+<body>
+
+  <!-- Splash / Intro -->
+  <div id="splash" aria-hidden="true">
+    <div class="splash-bg"></div>
+    <img class="splash-logo" src="../img/logo.png" alt="Rejuntamix">
+  </div>
+
+  <main>
+    <div id="cabecalho">
+      <img src="../img/mascote.png" alt="logo" />
+      <a href="../index.html">Voltar</a>
+    </div>
+
+    <section id="roleta-area">
+      <div id="wheel-wrap">
+        <div id="wheel">
+          <img src="../img/roleta.png" alt="Roleta" />
+        </div>
+        <div class="pin" aria-hidden="true"></div>
+      </div>
+
+      <button id="spinBtn" type="button">Girar</button>
+      <p id="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <!-- Modal de resultado -->
+  <div id="resultado" role="dialog" aria-modal="true" aria-hidden="true">
+    <div id="box">
+      <div id="boximg"><img src="../img/05.png" alt="" id="imgres"></div>
+      <div id="boxinf">
+        <h1 id="res-titulo">Resultado</h1>
+        <h2 id="res-texto">—</h2>
+        <a href="../index.html" id="res-btn">Reiniciar</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/roleta.js"></script>
+</body>
+</html>
